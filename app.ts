@@ -1,29 +1,20 @@
 import express from "express";
+import dotenv from "dotenv";
 import cors from "cors";
 
-import { getPlayerByName } from "./services/sportsDb.service";
-import { loadCountryCodes } from "./services/flags.service";
+import { flagService } from "./services/flags.service";
+import { routes } from "./api/routes";
+
+dotenv.config();
 
 const app = express();
-const port = 8080;
+const port = process.env.PORT || 8081;
 
+dotenv.config();
 app.use(cors());
+routes(app);
 
-app.get("/api/v1/players", async (req, res) => {
-  const searchString = req.query.name as string;
-
-  const data = await getPlayerByName(searchString);
-  
-  console.log(data);
-  if(data) {
-    res.status(200).send(data);
-  }
-  else{
-    res.status(404).send('Player not found');
-  }
-});
-
-app.listen(port, async() => {
+app.listen(port, async () => {
   console.log(`Application listening on port ${port}`);
-  await loadCountryCodes();
+  await flagService.loadCountryCodes();
 });

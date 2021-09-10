@@ -1,17 +1,23 @@
 import axios from "axios";
+import cache from "memory-cache";
 
 // https://flagcdn.com/en/codes.json
-let countryCodes;
 
-export const loadCountryCodes = async () => {
-    if(!countryCodes) {
-        const {data} = await axios.get('https://flagcdn.com/en/codes.json');
-        countryCodes = data;
+export const flagService = {
+  loadCountryCodes: async () => {
+    const countryCodes = cache.get("country-codes");
+    if (!countryCodes) {
+      const { data } = await axios.get("https://flagcdn.com/en/codes.json");
+      cache.put("country-codes", data);
     }
-    console.log('Country Codes Loaded');
-}
+    console.log("Country Codes Loaded");
+  },
 
-export const getFlagByCountryName = (name: string) => {
-    const countryCode = Object.keys(countryCodes).find(key => countryCodes[key] === name);
-    return `https://flagcdn.com/w20/${countryCode}.jpg`
-}
+  getFlagByCountryName: (name: string) => {
+    const countryCodes = cache.get("country-codes");
+    const countryCode = Object.keys(countryCodes).find(
+      (key) => countryCodes[key] === name
+    );
+    return `https://flagcdn.com/w20/${countryCode}.jpg`;
+  },
+};

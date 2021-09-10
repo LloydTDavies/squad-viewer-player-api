@@ -1,20 +1,22 @@
 import axios from "axios";
 import { Nationality } from "../models/nationality.model";
 import { Player } from "../models/player.model";
-import { getFlagByCountryName } from "./flags.service";
+import { flagService } from "./flags.service";
 
-export const getPlayerByName = async (name: string) => {
-  const searchString = name.trim().replace(" ", "%20");
-  const { data } = await axios.get(
-    `https://www.thesportsdb.com/api/v1/json/1/searchplayers.php?p=${searchString}`
-  );
+export const playerService = {
+  getPlayerByName: async (name: string): Promise<Player[]> => {
+    const searchString = name.trim().replace(" ", "%20");
+    const { data } = await axios.get(
+      `https://www.thesportsdb.com/api/v1/json/1/searchplayers.php?p=${searchString}`
+    );
 
-  if (!data.player) {
-    return null;
-  }
-  return filterPlayerSearchResponse(data).map((player) =>
-    mapPlayerResponse(player)
-  );
+    if (!data.player) {
+      return null;
+    }
+    return filterPlayerSearchResponse(data).map((player) =>
+      mapPlayerResponse(player)
+    );
+  },
 };
 
 const filterPlayerSearchResponse = (data) => {
@@ -48,7 +50,7 @@ const mapNationality = (nationality: string): Nationality => {
   const nation = getNationForFlagApi(nationality);
   return {
     name: nation,
-    icon: getFlagByCountryName(nation),
+    icon: flagService.getFlagByCountryName(nation),
   };
 };
 
