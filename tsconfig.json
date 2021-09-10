@@ -8,5 +8,10 @@
     "types": [
       "jest", "ts-jest"
     ],
-  }
+    "outDir": "dist", 
+  },
+"exclude": [
+  "**/__test__/**",
+  "**/*.test.ts"
+]
 }

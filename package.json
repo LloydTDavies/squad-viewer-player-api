@@ -6,7 +6,8 @@
   "scripts": {
     "serve": "nodemon app.ts",
     "test": "jest",
-    "test-watch": "jest --watch"
+    "test-watch": "jest --watch",
+    "build": "tsc"
   },
   "author": "Lloyd Davies",
   "license": "ISC",
