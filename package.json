@@ -1,7 +1,7 @@
 {
-  "name": "squad-viewer-api",
+  "name": "squad-viewer-player-api",
   "version": "1.0.0",
-  "description": "Squad Viewer Api",
+  "description": "Squad Viewer Player Api",
   "main": "app.js",
   "scripts": {
     "serve": "nodemon app.ts",
