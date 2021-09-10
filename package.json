@@ -1,0 +1,27 @@
+{
+  "name": "squad-viewer-api",
+  "version": "1.0.0",
+  "description": "Squad Viewer Api",
+  "main": "app.js",
+  "scripts": {
+    "serve": "nodemon app.ts",
+    "test": "jest"
+  },
+  "author": "Lloyd Davies",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^0.21.4",
+    "cors": "^2.8.5",
+    "express": "^4.17.1"
+  },
+  "devDependencies": {
+    "@types/express": "^4.17.13",
+    "@types/jest": "^27.0.1",
+    "@types/node": "^16.9.0",
+    "jest": "^27.1.1",
+    "nodemon": "^2.0.12",
+    "ts-jest": "^27.0.5",
+    "ts-node": "^10.2.1",
+    "typescript": "^4.4.2"
+  }
+}
